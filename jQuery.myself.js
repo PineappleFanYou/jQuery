@@ -94,5 +94,14 @@
         }
         return this;
     }
+
+    // 移除类名 jq对象.removeClass(类名)
+    Init.prototype.removeClass = function (className) {
+        //循环遍历伪数组，让每个元素都实现类名的移除
+        for (let i = 0; i < this.length; i++) {
+            this[i].classList.remove(className);
+        }
+        return this;
+    }
     window.$ = window.jQuery = jQuery;
 })();

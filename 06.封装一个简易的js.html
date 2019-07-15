@@ -10,13 +10,17 @@
         .a {
             font-size: 100px;
         }
+
+        .b {
+            font-weight: 700;
+        }
     </style>
 </head>
 
 <body>
-    <div class="box">123</div>
-    <div class="box">456</div>
-    <div class="box">789</div>
+    <div class="box b">123</div>
+    <div class="box b">456</div>
+    <div class="box b">789</div>
 </body>
 <script src="./jQuery.myself.js"></script>
 <script>
@@ -33,6 +37,7 @@
     console.log(box.css('backgroundColor'));
 
     box.addClass('a');
+    box.removeClass('b');
 </script>
 
 </html>
