@@ -41,8 +41,11 @@
     // 设置css样式的时候，需要两个值，传参数进去
     Init.prototype.css = function (property, value) {
         // 如果没有传入第二个参数，那就是获取，所以要判断用户到底是传入几个参数
+        //因为 value是第二个参数，如果没有第二个参数，那就是undefined
         if (value == undefined) {
             //这个只有一个参数的是获取
+            //通常我们要获取背景颜色，肯定是精准的某个元素，通常情况下，我们在伪数组里面只拿出一个，所以它是第0个
+            // getComputedStyle 获取任意样式，返回一个对象，对象我们通过键的方式获取
             return window.getComputedStyle(this[0])[property];
         } else {
             // 这个有两个参数的是设置
@@ -78,6 +81,18 @@
             return this;
         }
 
+    }
+
+    /* 
+        实现addClass功能
+        jq对象.addClass(类名)
+    */
+    Init.prototype.addClass = function (className) {
+        // 循环遍历伪数组，把里面的每个元素都实现添加类名
+        for (let i = 0; i < this.length; i++) {
+            this[i].classList.add(className);
+        }
+        return this;
     }
     window.$ = window.jQuery = jQuery;
 })();
