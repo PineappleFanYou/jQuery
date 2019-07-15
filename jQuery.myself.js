@@ -30,6 +30,54 @@
         // 给伪数组加一个长度属性
         this.length = nodeList.length;
     }
+    /**
+     * jq的css方法，有两个功能
+     *    设置css样式
+     *      jq对象.css(属性名,属性值)
+     *    获取css样式
+     *      jq对象.css(属性名)
+     * 
+     *  */
+    // 设置css样式的时候，需要两个值，传参数进去
+    Init.prototype.css = function (property, value) {
+        // 如果没有传入第二个参数，那就是获取，所以要判断用户到底是传入几个参数
+        if (value == undefined) {
+            //这个只有一个参数的是获取
+            return window.getComputedStyle(this[0])[property];
+        } else {
+            // 这个有两个参数的是设置
+            // 有一个数组，里面存储了所有的需要带单位的属性名
+            // 简单处理带单位的数组   
+            let pxArr = ['width', 'height', 'top', 'left', 'right', 'buttom']
+            // 元素对象.style.css属性 = 新的值;
+            // 元素对象是哪个 ？我们用console.log()打印一下
+            // 把伪数组中的每一个都遍历，设置它的css样式属性
+            for (let i = 0; i < this.length; i++) {
+                // console.log(this[i])  /* 这里的this[i] 代表了每个div的盒子 */
+                //由于我们还不确定用户是要设置哪一个css的属性，所以我们需要用参数的形式在表示，用参数传进来
+                // 把要带单位的属性和不带单位的属性区分开,主要是我们不知道用户是设置长宽高还是设置其他颜色之类的，所以我们要区分开了，除了长宽高有单位，其他的都没有
+                if (pxArr.indexOf(property) !== -1) {
+                    // 不等于 -1的情况下，那就是传入参数是我呢吧简单处理的数组里面的几个字符串
+                    //我们这里需要判断，有些用户可能在输入时候就写了单位，所以我们要判断用户是否写了单位，如果写了，那我们就不加单位
+                    // 字符串的indexOf方法  如果用户在字符串里面输入的没有px，那么就是 -1
+                    // console.log('abcdef'.indexOf('g'));
+                    if (value.toString().indexOf('px') === -1) {
+                        // 如果没有带单位，那么我们就给加上
+                        this[i].style[property] = value + 'px';
+                    } else {
+                        //如果有带单位，我们就不管
+                        this[i].style[property] = value;
+                    }
+                } else {
+                    //如果不是那几个，那么久全部不需要带单位
+                    this[i].style[property] = value;
+                }
+            }
+            //最后返回this，用于实现链式编程
+            //其实是返回给函数，然后函数赋值给css
+            return this;
+        }
 
+    }
     window.$ = window.jQuery = jQuery;
 })();
