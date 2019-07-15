@@ -30,6 +30,15 @@
         // 给伪数组加一个长度属性
         this.length = nodeList.length;
     }
+
+    // 很多的方法，都会遍历伪数组的，就先封装遍历伪数组的方法
+    Init.prototype.each = function (callback) {
+        for (let i = 0; i < this.length; i++) {
+            // 在遍历里面的逻辑是不确定的,有可能改类名，该样式，改其他的 - 所以我们要传回调函数进来
+            //   callback(索引，元素对象)
+            callback(i, this[i]); /*  this[i] 是每个元素 */
+        }
+    }
     /**
      * jq的css方法，有两个功能
      *    设置css样式
@@ -98,18 +107,19 @@
     // 移除类名 jq对象.removeClass(类名)
     Init.prototype.removeClass = function (className) {
         //循环遍历伪数组，让每个元素都实现类名的移除
-        for (let i = 0; i < this.length; i++) {
-            this[i].classList.remove(className);
-        }
+        //jq对象.each
+        this.each(function (i, e) {
+            e.classList.remove(className);
+        })
         return this;
     }
 
     // 切换类名  jq对象.toggleClass
     Init.prototype.toggleClass = function (className) {
         //循环遍历，让每个元素都可以实现类名的切换
-        for (let i = 0; i < this.length; i++) {
-            this[i].classList.toggle(className);
-        }
+        this.each(function (i, e) {
+            e.classList.remove(className);
+        })
         return this;
     }
     window.$ = window.jQuery = jQuery;
