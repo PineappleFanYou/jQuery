@@ -103,5 +103,14 @@
         }
         return this;
     }
+
+    // 切换类名  jq对象.toggleClass
+    Init.prototype.toggleClass = function (className) {
+        //循环遍历，让每个元素都可以实现类名的切换
+        for (let i = 0; i < this.length; i++) {
+            this[i].classList.toggle(className);
+        }
+        return this;
+    }
     window.$ = window.jQuery = jQuery;
 })();
