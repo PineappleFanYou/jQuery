@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    //大分类
+    function Dog(name, color) {
+        this.name = name;
+        this.color = color;
+    }
+    Dog.prototype.sayHi = function () {
+        console.log('我是一条狗，我叫' + this.name + '，我是一只大' + this.color + '狗,今年' + this.age + '岁 ');
+    }
+    // 小分类
+    function Smalldog(name, color, age) {
+        // 大分类构造函数.call(this,大分类的构造函数的参数一个一个的放进来);
+        Dog.call(this, name, color);
+        this.age = age;
+    }
+    // 小分类构造函数.prototype = new 大分类构造函数();
+    Smalldog.prototype = new Dog();
+    // 原型继承会导致原型丢失constructor属性，我们最好手动的补上
+    Smalldog.prototype.constructor = Smalldog;
+    let s1 = new Smalldog('猪凯波', '黑', 3);
+    s1.sayHi();
+</script>
+
+</html>

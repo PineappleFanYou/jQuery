@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 创建父类 
+    class Person {
+        // 实例对象
+        constructor(name) {
+            this.name = name;
+        }
+        showName() {
+            console.log(this.name); /* 输出的是   光头强 */
+        }
+    }
+    console.log(typeof Person); /* 输出的是    function */
+    //子类
+    class Student extends Person {
+        constructor(name, age) {
+            // super 需要放在前面
+            super(name);
+            this.age = age;
+        }
+    }
+    let stu1 = new Student('光头强', 26);
+    console.log(stu1); /*  输出的是   Student */
+    console.log(stu1.showName()); /* 输出的是： undefined */
+</script>
+
+</html>

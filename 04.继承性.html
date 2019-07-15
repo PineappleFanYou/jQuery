@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    //构造自定义函数
+    //大分类
+    function Person(name, age, gender) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+    }
+    //person.prototype 是一个原型对象    对象.属性  对象点的是属性，在函数没有赋值给属性之前，sayHi 是一个属性， 在函数赋值之后，sayHi可以说是方法，也可以说是属性
+    Person.prototype.sayHi = function () {
+        console.log('我是' + this.name + '，今年' + this.age + '岁，是一个' + this.gender + '的，擅长砍树');
+    }
+
+    // 创造一个函数  里面放入实参
+    // let p1 = new Person('光头强', 26, '男');
+    // 要先创建函数，再调用， 因为，在函数没有构造之前，如果把p1.sayHi放在自定义函数之前， 那么p1肯定是 not a function
+    // p1.sayHi();   
+    // console.log(p1);  /* 输出的是对象 */
+    // 我们只有对象.属性    对象.方法      没有对象.函数  Person 是一个函数
+    // p1.Person();
+
+    // 小分类
+    function Student(name, age, gender, number) {
+        // 函数名.call(新this,函数需要的参数一个一个传递)
+        /*
+      借用构造函数实现继承的固定用法：
+        大分类构造函数.call(this,大分类所需的参数一个一个的传递);
+    */
+        // Person.call(this.name, age, gender);
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.number = number;
+        this.say = () => {
+
+            Person.prototype.sayHi.call(this)
+        }
+        this.number = number;
+    }
+    // Student.prototype = new Person();
+    let s1 = new Student('光头强', 27, '男', 77);
+    s1.say();
+</script>
+
+</html>

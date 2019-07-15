@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    //假设我们要处理学生的成绩表，为了表示一个学生的成绩，面向过程的程序可以用一个对象表示：
+    // 这个是面向过程
+    // let stu1 = {
+    //     name: '光头强',
+    //     score: 98
+    // }
+    // let stu2 = {
+    //     name: '熊大',
+    //     score: 78
+    // }
+    // //而处理学生成绩可以通过函数实现，比如打印学生的成绩：
+    // // student 表示参数 形参 
+    // function printScore(student) {
+    //     console.log('姓名：' + student.name + '' + '成绩' + student.score)
+    // }
+    // printScore()
+
+
+    /* 
+    如果采用面向对象的程序设计思想，我们首选思考的不是程序的执行流程，
+    而是 Student 这种数据类型应该被视为一个对象，这个对象拥有 name 和 score 这两个属性（Property）。
+     */
+    //如果要打印一个学生的成绩，首先必须创建出这个学生对应的对象，然后，给对象发一个 printScore 消息，让对象自己把自己的数据打印出来。
+
+
+    //class 是 面向对象中的类
+    class Student {
+        //constructor是一个构造方法，用来接收参数    constructor 是构造函数的意思
+        constructor(name, score) {
+            //this代表的是实例对象
+            this.name = name;
+            this.score = score;
+        }
+        printScore() {
+            console.log('姓名：' + this.name + ' ' + '成绩：' + this.score)
+        }
+    }
+    //根据模板创建具体实例对象（Instance）：  Instance -- 实例
+    let std1 = new Student('熊大', 98);
+    let std2 = new Student('熊二', 87);
+    //实例对象具有自己的具体行为（给对象发消息）：
+    std1.printScore();
+    std2.printScore();
+</script>
+
+</html>

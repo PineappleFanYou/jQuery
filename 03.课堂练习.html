@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 你是饮料厂的老板 你有一个制作饮料的机器 1. 可乐 2. 柠檬茶 3. 雪碧 ........
+    // var kele = {
+    //     color: '褐色',
+    //     qipao: true,
+    // }
+    // var ningmengcha = {
+    //     color: 'yellow',
+    //     qipao: false
+    // }
+    // var xuebi = {
+    //     color: 'transparent', // 透明色
+    //     qipao: true
+    // }
+    // // new 出来的都是对象 new 后面的都是构造函数 构造函数就是构造出对象的函数
+    // function Yinpin(color, qipao) {
+    //     this.color = color
+    //     this.qipao = qipao
+    // }
+    // var kele = new Yinpin('褐色', true)
+    // var ningmengcha = new Yinpin('yellow', false)
+    // var xuebi = new Yinpin('transparent', true)
+
+    // function Person(name, age, gender) {
+    //     this.name = name;
+    //     this.age = age;
+    //     this.gender = gender;
+    // }
+    // 构造函数.prototype 就是原型
+    // 原型对象的作用： 该对象可以为构造函数的实例对象，提供方法
+    // Person.prototype.sayHi = function () {
+    //     console.log('我是' + this.name + '今年' + this.age + '是一个' + this.gender + '擅长砍树');
+    // }
+    // // new Person 中的
+    // // 所有的原型对象上的方法，必须使用 实例对象调用
+    // let p1 = new Person('光头强', 12, '男');
+    // // console.log(p1);
+    // p1.sayHi();
+    // // console.log(p1 instanceof Person);
+    // // console.log(p1 instanceof Array);
+
+
+
+    function Factory(kele, nmc, xuebi) {
+        this.kele = kele;
+        this.nmc = nmc;
+        this.xuebi = xuebi;
+    }
+    Factory.prototype.haoHe = function () {
+        console.log('我买了三种饮料，分别是：' + this.kele, this.nmc, this.xuebi + ',总共花了' + this.money + '元');
+    }
+    // let f1 = new Factory('可乐', '柠檬茶', '雪碧');
+    // f1.haoHe();
+    function Student(kele, nmc, xuebi, money) {
+        Factory.call(this, kele, nmc, xuebi);
+        this.money = money;
+    }
+    Student.prototype = new Factory();
+    Student.prototype.construction = Student;
+    let s1 = new Student('可乐', '柠檬茶', '雪碧', 9)
+    s1.haoHe();
+</script>
+
+</html>
